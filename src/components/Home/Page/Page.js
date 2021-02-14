@@ -1,6 +1,6 @@
 import "./Page.css";
 import { Jumbotron, Container } from "reactstrap";
-import { Button } from "react-bootstrap";
+import { Button } from 'reactstrap';
 
 const Page = (props) => {
   return (
@@ -11,8 +11,8 @@ const Page = (props) => {
           <h1 className='display-3'>{props.title}</h1>
           <p className='lead'>{props.text}</p>
           <div className='buttons'>
-              <Button>Edit</Button>
-              <Button>Delete</Button>
+              <Button color="warning" onClick={props.edit}>Edit</Button>
+              <Button color="danger" onClick={props.delete}>Delete</Button>{' '}
           </div>
         </Container>
       </Jumbotron>

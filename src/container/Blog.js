@@ -6,12 +6,14 @@ import { Route, Switch, useHistory } from "react-router-dom";
 import Home from "../components/Home/Home";
 import axios from "axios";
 import Page from "../components/Home/Page/Page";
+import EditForm from '../components/EditForm/EditForm';
 
 const Blog = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [blogId, setBlogId] = useState("");
   const [singleData, setSingleData] = useState();
+  const [editValue, setEditValue] = useState();
 
   useEffect(() => {
     setLoading(true);
@@ -43,34 +45,98 @@ const Blog = () => {
     fetchData();
   }, [blogId]);
   console.log(singleData);
+
   let jumpSinglePage = (id) => {
     setBlogId(id);
     return history.push("/posts/" + id);
   };
 
+  let jumpEditPage = id => {
+    return history.push('/posts/' + blogId + '/edit')
+  }
+
+let deletePage = () => {
+  setLoading(true)
+let fetchData = async() => {
+  try{
+   await axios.delete(blogId + '.json');
+   history.push('/')
+  }catch(e) {
+    console.error(e);
+  }
+}
+fetchData().finally(() => setLoading(false))
+}
+
+let editPage = () => {
+  setLoading(true)
+let fetchData = async() => {
+  try{
+   await axios.put(blogId + '.json');
+   history.push('/')
+  }catch(e) {
+    console.error(e);
+  }
+}
+fetchData().finally(() => setLoading(false))
+}
+let changeValue = e => {
+  let name = e.target.name;
+  let value = e.target.value;
+  setSingleData({...singleData, [name]: value})
+}
+
+let submitEditForm = e => {
+  setLoading(true)
+  e.preventDefault();
+  let fetchData = async() => {
+try{
+  console.log(blogId);
+let newValue = {date: singleData.date, title: singleData.title, text: singleData.text};
+let response = await axios.put(blogId + '.json', newValue);
+return history.push('/posts/' + blogId)
+}catch(e) {
+  console.error(e);
+}
+  }
+  fetchData().finally(() => setLoading(false))
+}
+console.log(singleData);
   let history = useHistory();
 
   return (
     <div className='Blog'>
       {loading ? <Spinner /> : null}
-      <Switch>
         <Layout>
+          <Switch>
           <Route exact
             path='/'render={() => {
               return <Home array={data} click={jumpSinglePage} />;
             }}
           />
-          <Route path='/posts/:id' render={() => {
+          <Route exact path='/posts/:id' render={() => {
             return <Page 
             date={singleData.date}
             title={singleData.title}
             text={singleData.text}
+            delete={deletePage}
+            edit={jumpEditPage}
             /> 
           }}/>
-          {/* <Route render={() => <p>Page not found</p>} /> */}
+          <Route path='/posts/:id/edit' render={() => {
+            return <EditForm 
+            valueTitle={singleData.title}
+            valueText={singleData.text}
+            nameText='text'
+            nameTitle='title'
+            change={(e) => changeValue(e)}
+            submit={(e) => submitEditForm(e)}
+            />
+          }}
+          />
+ <Route render={() => <p>Page not found</p>} />
+          </Switch>
         </Layout>
-      </Switch>
-      {/* <Spinner/> */}
     </div>
   );
 };
