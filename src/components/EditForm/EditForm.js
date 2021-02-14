@@ -21,6 +21,7 @@ const EditForm = (props) => {
         <FormGroup>
           <Label for='text'>Content</Label>
           <Input
+            className='textarea'
             type='textarea'
             id='text'
             name={props.nameText}
