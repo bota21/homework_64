@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import reportWebVitals from './reportWebVitals';
-import Blog from './container/Blog';
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
+import App from './App';
 
 axios.defaults.baseURL = 'https://js-react-node-default-rtdb.firebaseio.com/blog';
 
 ReactDOM.render(
   <BrowserRouter>
   <React.StrictMode>
-    <Blog />
+    <App />
   </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root')

@@ -1,5 +1,4 @@
-import { propTypes } from 'react-bootstrap/esm/Image';
-import Header from './Header/Header';
+import Header from '../Header/Header';
 
 const Layout = props => {
     return <>

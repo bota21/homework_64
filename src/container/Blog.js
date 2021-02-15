@@ -3,13 +3,13 @@ import Spinner from "../components/modalWindow/Spinner/Spinner";
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout/Layout";
 import { Route, Switch, useHistory } from "react-router-dom";
-import Home from "../components/Home/Home";
+import Home from "./Home/Home";
 import axios from "axios";
-import Page from "../components/Home/Page/Page";
-import EditForm from "../components/EditForm/EditForm";
-import AddForm from "../components/AddForm/AddForm";
-import About from "../components/About/About";
-import Contacts from '../components/Contacts/Contacts';
+import Page from "./Page/Page";
+import EditForm from "./EditForm/EditForm";
+import AddForm from "./AddForm/AddForm";
+import About from "./About/About";
+import Contacts from './Contacts/Contacts';
 
 const Blog = () => {
   const [data, setData] = useState([]);
