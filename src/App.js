@@ -1,11 +1,11 @@
 import { Route, Switch } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
-import Home from "./container/Home/Home";
-import Page from "./container/Page/Page";
-import EditForm from "./container/EditForm/EditForm";
-import AddForm from "./container/AddForm/AddForm";
-import About from "./container/About/About";
-import Contacts from "./container/Contacts/Contacts";
+import Home from "./containers/Home/Home";
+import Page from "./containers/Page/Page";
+import EditForm from "./containers/EditForm/EditForm";
+import AddForm from "./containers/AddForm/AddForm";
+import About from "./containers/About/About";
+import Contacts from "./containers/Contacts/Contacts";
 
 const App = () => {
   return (
